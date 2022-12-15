@@ -55,9 +55,9 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     return 1; //usunac
 }
 
-//uint8_t buffer[128] = {0};
-//uint8_t decoded[64] = {0};
-//uint8_t decrypted[64] = {0};
+uint8_t buffer[128] = {0};
+uint8_t decoded[64] = {0};
+uint8_t decrypted[64] = {0};
 
 inline void dumpHex(uint8_t* data, int len) {
  /*   for (int i = 0; i < len; i++) {
