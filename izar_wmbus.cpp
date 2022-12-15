@@ -55,9 +55,9 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     return 1; //usunac
 }
 
-uint8_t buffer[128] = {0};
-uint8_t decoded[64] = {0};
-uint8_t decrypted[64] = {0};
+//uint8_t buffer[128] = {0};
+//uint8_t decoded[64] = {0};
+//uint8_t decrypted[64] = {0};
 
 inline void dumpHex(uint8_t* data, int len) {
  /*   for (int i = 0; i < len; i++) {
@@ -112,7 +112,8 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 }
 
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
-    //Serial.println("**********************TEST fetch**********************");
+  /* 
+  //Serial.println("**********************TEST fetch**********************");
 
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
         //Serial.println("**********************TEST if**********************");
@@ -176,6 +177,8 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         return FETCH_NO_DATA;
         //Serial.println("**********************TEST else**********************");
     }
+    */
+     return FETCH_NO_DATA;
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
