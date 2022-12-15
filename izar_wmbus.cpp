@@ -104,7 +104,7 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
     
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
-        Serial.println("**********************TEST if**********************");
+        //Serial.println("**********************TEST if**********************");
         //====READ====
         uint8_t len = ReceiveData2(buffer);
         uint8_t decodeErrors = 0;
@@ -116,12 +116,12 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
 
         if (decodeErrors != 0) {
             return FETCH_3OF6_ERROR;
-            Serial.println("**********************TEST errors**********************");
+            //Serial.println("**********************TEST errors**********************");
         }
 
         if (!checkCRC(decoded, decodedLen)) {
             return FETCH_CRC_ERROR;
-            Serial.println("**********************TEST CRC**********************");
+            //Serial.println("**********************TEST CRC**********************");
         }
 
         uint32_t thisMeterId = uintFromBytesLittleEndian(decoded + 4);
@@ -147,24 +147,24 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
 
         if (print_telegrams) {
             dumpHex(decoded, decodedLen);
-            Serial.println("**********************TEST telegrams**********************");
+            //Serial.println("**********************TEST telegrams**********************");
         }
         if (print_decoded) {
             dumpHex(decrypted, decryptedLen);
-            Serial.println("**********************TEST decoded**********************");
+            //Serial.println("**********************TEST decoded**********************");
         }
 
         data->waterUsage = uintFromBytesLittleEndian(decrypted + 1);
 
         if (!isSensibleResult(data)) {
             return FETCH_NON_SENSIBLE_DATA;
-            Serial.println("**********************TEST non sensible**********************");
+            //Serial.println("**********************TEST non sensible**********************");
         }
 
         return FETCH_SUCCESSFUL;
     } else {
         return FETCH_NO_DATA;
-        Serial.println("**********************TEST else**********************");
+        //Serial.println("**********************TEST else**********************");
     }
 }
 
