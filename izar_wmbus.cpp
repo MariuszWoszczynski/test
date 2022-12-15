@@ -166,7 +166,7 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         return FETCH_NO_DATA;
         //Serial.println("**********************TEST else**********************");
     }
-    */return 1;
+    */return FETCH_NO_DATA;
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
