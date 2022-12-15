@@ -3,7 +3,8 @@
 #include <ELECHOUSE_CC1101_SRC_DRV.h>
 
 #include "izar_utils.h"
-#include "wmbus_t_cc1101_config.h"
+//#include "wmbus_t_cc1101_config.h"
+#include "tmode_rf_settings.hpp"
 
 void IzarWmbus::init(uint32_t waterMeter) {
     #ifdef ESP32
