@@ -1,4 +1,3 @@
-
 #include "izar_wmbus.h"
 
 #include <ELECHOUSE_CC1101_SRC_DRV.h>
@@ -7,7 +6,7 @@
 #include "wmbus_t_cc1101_config.h"
 
 void IzarWmbus::init(uint32_t waterMeter) {
- /*   #ifdef ESP32
+    #ifdef ESP32
     ELECHOUSE_cc1101.setSpiPin(14, 12, 13, 15);
     #endif
 
@@ -38,8 +37,6 @@ void IzarWmbus::init(uint32_t waterMeter) {
     ELECHOUSE_cc1101.SetRx();
 
     Serial.println("device initialized");
-   */
-   Serial.println("device pomieniety");
 }
 
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
@@ -47,11 +44,9 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     if (size) {
         ELECHOUSE_cc1101.SpiReadBurstReg(CC1101_RXFIFO, rxBuffer, size);
     }
-    ELECHOUSE_cc1101.SpiStrobe(CC1101_SFRX);
-    ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
-     
+   // ELECHOUSE_cc1101.SpiStrobe(CC1101_SFRX);
+   // ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
     return size;
-
 }
 
 uint8_t buffer[128] = {0};
@@ -59,12 +54,11 @@ uint8_t decoded[64] = {0};
 uint8_t decrypted[64] = {0};
 
 inline void dumpHex(uint8_t* data, int len) {
-   for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) {
         Serial.print(data[i], HEX);
         Serial.print(" ");
     }
     Serial.println();
- 
 }
 
 bool IzarWmbus::checkCRCForSection(uint8_t* section, uint8_t sectionLen) {
@@ -74,7 +68,6 @@ bool IzarWmbus::checkCRCForSection(uint8_t* section, uint8_t sectionLen) {
     }
     crc = ~crc;
     return uint16FromBytes(section + sectionLen) == crc;
-
 }
 
 bool IzarWmbus::checkCRC(uint8_t* packet, uint8_t len) {
@@ -105,12 +98,11 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 
     // 12 = 10 header (incl size byte) + 2 CRC
     return 12 + sections * 18;
-
 }
 
-FetchResult IzarWmbus::fetchPacket(IzarResultData* data) { 
-
+FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
+        //====READ====
         uint8_t len = ReceiveData2(buffer);
         uint8_t decodeErrors = 0;
 
@@ -136,7 +128,7 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         }
 
         data->meterId = thisMeterId;
-       
+
         // strip out WMBUS CRC for decryption
         for (int i = 12; i < decodedLen; i++) {
             decoded[i - 2] = decoded[i];
@@ -165,12 +157,9 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
     } else {
         return FETCH_NO_DATA;
     }
-    
-     return FETCH_SUCCESSFUL; //usunac**************************
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
- 
     auto hasLastUsage = lastResults.find(data->waterUsage);
 
     if (hasLastUsage == lastResults.end()) {
@@ -185,13 +174,14 @@ bool IzarWmbus::isSensibleResult(IzarResultData* data) {
     if (-SENSIBLE_RESULT_THRESHOLD < diff && diff < SENSIBLE_RESULT_THRESHOLD) {
         return true;
     }
+
     return false;
 }
 
 void IzarWmbus::ensureRx() {
-    //if ((ELECHOUSE_cc1101.SpiReadStatus(CC1101_MARCSTATE) & 0x0F) == 0x01) {
-    //    ELECHOUSE_cc1101.SetRx();
-    //}
+    if ((ELECHOUSE_cc1101.SpiReadStatus(CC1101_MARCSTATE) & 0x0F) == 0x01) {
+        ELECHOUSE_cc1101.SetRx();
+    }
 }
 
 int IzarWmbus::decode3outOf6(uint8_t* input, const uint8_t inputLen,
