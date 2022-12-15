@@ -178,7 +178,7 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         //Serial.println("**********************TEST else**********************");
     }
     */
-     return FETCH_NO_DATA;
+     return FETCH_SUCCESSFUL;
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
@@ -217,5 +217,5 @@ int IzarWmbus::decode3outOf6(uint8_t* input, const uint8_t inputLen,
    //     }
    // }
    // return i * 2;
-      return 2; //usunac
+      return 1; //usunac
 }
