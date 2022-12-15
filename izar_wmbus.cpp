@@ -7,7 +7,7 @@
 #include "wmbus_t_cc1101_config.h"
 
 void IzarWmbus::init(uint32_t waterMeter) {
-    #ifdef ESP32
+ /*   #ifdef ESP32
     ELECHOUSE_cc1101.setSpiPin(14, 12, 13, 15);
     #endif
 
@@ -38,7 +38,8 @@ void IzarWmbus::init(uint32_t waterMeter) {
     ELECHOUSE_cc1101.SetRx();
 
     Serial.println("device initialized");
-}
+   
+}*/
 
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
@@ -47,6 +48,7 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     }
     ELECHOUSE_cc1101.SpiStrobe(CC1101_SFRX);
     ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
+     
     return size;
 }
 
@@ -102,8 +104,8 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 }
 
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
-    Serial.println("**********************TEST fetch**********************");
-    /*
+    //Serial.println("**********************TEST fetch**********************");
+
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
         //Serial.println("**********************TEST if**********************");
         uint8_t len = ReceiveData2(buffer);
@@ -166,7 +168,6 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         return FETCH_NO_DATA;
         //Serial.println("**********************TEST else**********************");
     }
-    */return FETCH_NO_DATA;
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
