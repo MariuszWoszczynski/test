@@ -43,7 +43,7 @@ void IzarWmbus::init(uint32_t waterMeter) {
 }
 
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
-     /* uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
+    uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
     if (size) {
         ELECHOUSE_cc1101.SpiReadBurstReg(CC1101_RXFIFO, rxBuffer, size);
     }
@@ -51,8 +51,7 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
      
     return size;
-    */ 
-    return 1; //usunac
+
 }
 
 uint8_t buffer[128] = {0};
@@ -110,10 +109,8 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 }
 
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) { 
-  //Serial.println("**********************TEST fetch**********************");
 
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
-        //Serial.println("**********************TEST if**********************");
         uint8_t len = ReceiveData2(buffer);
         uint8_t decodeErrors = 0;
 
@@ -124,12 +121,10 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
 
         if (decodeErrors != 0) {
             return FETCH_3OF6_ERROR;
-            //Serial.println("**********************TEST errors**********************");
         }
 
         if (!checkCRC(decoded, decodedLen)) {
             return FETCH_CRC_ERROR;
-            //Serial.println("**********************TEST CRC**********************");
         }
 
         uint32_t thisMeterId = uintFromBytesLittleEndian(decoded + 4);
@@ -155,27 +150,23 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
 
         if (print_telegrams) {
             dumpHex(decoded, decodedLen);
-            //Serial.println("**********************TEST telegrams**********************");
         }
         if (print_decoded) {
             dumpHex(decrypted, decryptedLen);
-            //Serial.println("**********************TEST decoded**********************");
         }
 
         data->waterUsage = uintFromBytesLittleEndian(decrypted + 1);
 
         if (!isSensibleResult(data)) {
             return FETCH_NON_SENSIBLE_DATA;
-            //Serial.println("**********************TEST non sensible**********************");
         }
 
         return FETCH_SUCCESSFUL;
     } else {
         return FETCH_NO_DATA;
-        //Serial.println("**********************TEST else**********************");
     }
     
-     return FETCH_SUCCESSFUL; //usunac
+     return FETCH_SUCCESSFUL; //usunac**************************
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
