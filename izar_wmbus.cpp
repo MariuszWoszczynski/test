@@ -104,7 +104,7 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
     
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
-        Serial.println("**********************TEST**********************");
+        //Serial.println("**********************TEST**********************");
         //====READ====
         uint8_t len = ReceiveData2(buffer);
         uint8_t decodeErrors = 0;
