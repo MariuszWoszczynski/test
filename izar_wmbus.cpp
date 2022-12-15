@@ -60,27 +60,26 @@ uint8_t decoded[64] = {0};
 uint8_t decrypted[64] = {0};
 
 inline void dumpHex(uint8_t* data, int len) {
- /*   for (int i = 0; i < len; i++) {
+   for (int i = 0; i < len; i++) {
         Serial.print(data[i], HEX);
         Serial.print(" ");
     }
     Serial.println();
- */
+ 
 }
 
 bool IzarWmbus::checkCRCForSection(uint8_t* section, uint8_t sectionLen) {
-    /*uint16_t crc = 0;
+    uint16_t crc = 0;
     for (int i = 0; i < sectionLen; i++) {
         crc = crc16(crc, section[i]);
     }
     crc = ~crc;
     return uint16FromBytes(section + sectionLen) == crc;
- */
-   return 1; //usunac
+
 }
 
 bool IzarWmbus::checkCRC(uint8_t* packet, uint8_t len) {
-   /* if (!checkCRCForSection(packet, 10)) {
+    if (!checkCRCForSection(packet, 10)) {
         return false;
     }
 
@@ -95,7 +94,7 @@ bool IzarWmbus::checkCRC(uint8_t* packet, uint8_t len) {
             return false;
         }
     }
-*/
+
     return true;
 }
 
