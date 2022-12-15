@@ -43,7 +43,7 @@ void IzarWmbus::init(uint32_t waterMeter) {
 }
 
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
-    uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
+     /* uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
     if (size) {
         ELECHOUSE_cc1101.SpiReadBurstReg(CC1101_RXFIFO, rxBuffer, size);
     }
@@ -51,6 +51,8 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
      
     return size;
+    */ 
+    return 1; //usunac
 }
 
 uint8_t buffer[128] = {0};
@@ -58,24 +60,27 @@ uint8_t decoded[64] = {0};
 uint8_t decrypted[64] = {0};
 
 inline void dumpHex(uint8_t* data, int len) {
-    for (int i = 0; i < len; i++) {
+ /*   for (int i = 0; i < len; i++) {
         Serial.print(data[i], HEX);
         Serial.print(" ");
     }
     Serial.println();
+ */
 }
 
 bool IzarWmbus::checkCRCForSection(uint8_t* section, uint8_t sectionLen) {
-    uint16_t crc = 0;
+    /*uint16_t crc = 0;
     for (int i = 0; i < sectionLen; i++) {
         crc = crc16(crc, section[i]);
     }
     crc = ~crc;
     return uint16FromBytes(section + sectionLen) == crc;
+ */
+   return 1; //usunac
 }
 
 bool IzarWmbus::checkCRC(uint8_t* packet, uint8_t len) {
-    if (!checkCRCForSection(packet, 10)) {
+   /* if (!checkCRCForSection(packet, 10)) {
         return false;
     }
 
@@ -90,18 +95,20 @@ bool IzarWmbus::checkCRC(uint8_t* packet, uint8_t len) {
             return false;
         }
     }
-
+*/
     return true;
 }
 
 int calculateBytesLengthBasedOnDataLength(int size) {
-    int sections = ((size - 9) / 16);
+  /*  int sections = ((size - 9) / 16);
     if ((size - 9) % 16) {
         sections++;
     }
 
     // 12 = 10 header (incl size byte) + 2 CRC
     return 12 + sections * 18;
+ */
+  return 1; //usunac
 }
 
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
