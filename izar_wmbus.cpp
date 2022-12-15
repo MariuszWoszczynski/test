@@ -102,10 +102,10 @@ int calculateBytesLengthBasedOnDataLength(int size) {
 }
 
 FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
-    
+    Serial.println("**********************TEST fetch**********************");
+    /*
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
         //Serial.println("**********************TEST if**********************");
-        //====READ====
         uint8_t len = ReceiveData2(buffer);
         uint8_t decodeErrors = 0;
 
@@ -166,6 +166,7 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         return FETCH_NO_DATA;
         //Serial.println("**********************TEST else**********************");
     }
+    */
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
