@@ -46,7 +46,7 @@ uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     if (size) {
     //    ELECHOUSE_cc1101.SpiReadBurstReg(CC1101_RXFIFO, rxBuffer, size);
     }
-    //ELECHOUSE_cc1101.SpiStrobe(CC1101_SFRX);
+    ELECHOUSE_cc1101.SpiStrobe(CC1101_SFRX);
     //ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
     return size;
     }
