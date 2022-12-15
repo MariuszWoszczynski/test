@@ -40,15 +40,14 @@ void IzarWmbus::init(uint32_t waterMeter) {
 }
 //***************************tu jest problem****************************
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
-    //uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
+    uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
     //if (size) {
     //    ELECHOUSE_cc1101.SpiReadBurstReg(CC1101_RXFIFO, rxBuffer, size);
     //}
     //ELECHOUSE_cc1101.SpiStrobe(CC1101_SFRX);
     //ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
-    //return size;
-    return 1;
-}
+    return size;
+    }
 //**********************************************************************
 
 uint8_t buffer[128] = {0};
