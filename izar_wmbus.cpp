@@ -41,7 +41,7 @@ void IzarWmbus::init(uint32_t waterMeter) {
 //***************************tu jest problem****************************
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
-    ESP_LOGI("Info", "Size = %s", size);;
+    Serial.println(size);
     if (size) {
     //    ELECHOUSE_cc1101.SpiReadBurstReg(CC1101_RXFIFO, rxBuffer, size);
     }
