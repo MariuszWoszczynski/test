@@ -172,6 +172,7 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
+ /*
     auto hasLastUsage = lastResults.find(data->waterUsage);
 
     if (hasLastUsage == lastResults.end()) {
@@ -186,24 +187,25 @@ bool IzarWmbus::isSensibleResult(IzarResultData* data) {
     if (-SENSIBLE_RESULT_THRESHOLD < diff && diff < SENSIBLE_RESULT_THRESHOLD) {
         return true;
     }
-
+*/
     return false;
 }
 
 void IzarWmbus::ensureRx() {
-    if ((ELECHOUSE_cc1101.SpiReadStatus(CC1101_MARCSTATE) & 0x0F) == 0x01) {
-        ELECHOUSE_cc1101.SetRx();
-    }
+    //if ((ELECHOUSE_cc1101.SpiReadStatus(CC1101_MARCSTATE) & 0x0F) == 0x01) {
+    //    ELECHOUSE_cc1101.SetRx();
+    //}
 }
 
 int IzarWmbus::decode3outOf6(uint8_t* input, const uint8_t inputLen,
-                             uint8_t* output, uint8_t& errors) {
-    int i = 0;
-    errors = 0;
-    for (i = 0; i < inputLen / 3; i++) {
-        if (decode3of6Single(buffer + (i * 3), decoded + (i * 2)) == -1) {
-            errors++;
-        }
-    }
-    return i * 2;
+   //                          uint8_t* output, uint8_t& errors) {
+   // int i = 0;
+   // errors = 0;
+   // for (i = 0; i < inputLen / 3; i++) {
+   //     if (decode3of6Single(buffer + (i * 3), decoded + (i * 2)) == -1) {
+   //         errors++;
+   //     }
+   // }
+   // return i * 2;
+      return 2; //usunac
 }
