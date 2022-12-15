@@ -198,7 +198,7 @@ void IzarWmbus::ensureRx() {
 }
 
 int IzarWmbus::decode3outOf6(uint8_t* input, const uint8_t inputLen,
-   //                          uint8_t* output, uint8_t& errors) {
+                             uint8_t* output, uint8_t& errors) {
    // int i = 0;
    // errors = 0;
    // for (i = 0; i < inputLen / 3; i++) {
