@@ -22,9 +22,9 @@ void IzarWmbus::init(uint32_t waterMeter) {
     }
     ELECHOUSE_cc1101.Init();
 
-    for (uint8_t i = 0; i < WMBUS_T_CC1101_CONFIG_LEN; i++) {
-        ELECHOUSE_cc1101.SpiWriteReg(WMBUS_T_CC1101_CONFIG_BYTES[i << 1],
-                                     WMBUS_T_CC1101_CONFIG_BYTES[(i << 1) + 1]);
+    for (uint8_t i = 0; i < TMODE_RF_SETTINGS_LEN; i++) {
+        ELECHOUSE_cc1101.SpiWriteReg(TMODE_RF_SETTINGS_BYTES[i << 1],
+                                     TMODE_RF_SETTINGS__BYTES[(i << 1) + 1]);
     }
 
     ELECHOUSE_cc1101.SpiStrobe(CC1101_SCAL);
