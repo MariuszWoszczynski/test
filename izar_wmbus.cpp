@@ -1,5 +1,5 @@
 
-//#include "izar_wmbus.h"
+#include "izar_wmbus.h"
 
 //#include <ELECHOUSE_CC1101_SRC_DRV.h>
 
