@@ -195,7 +195,7 @@ bool IzarWmbus::isSensibleResult(IzarResultData* data) {
     if (-SENSIBLE_RESULT_THRESHOLD < diff && diff < SENSIBLE_RESULT_THRESHOLD) {
         return true;
     }
-return i * 2;
+    return false;
 }
 
 void IzarWmbus::ensureRx() {
