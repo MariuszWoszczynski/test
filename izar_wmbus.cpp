@@ -38,8 +38,9 @@ void IzarWmbus::init(uint32_t waterMeter) {
     ELECHOUSE_cc1101.SetRx();
 
     Serial.println("device initialized");
-   
-}*/
+   */
+   Serial.println("device pomieniety");
+}
 
 uint8_t IzarWmbus::ReceiveData2(byte* rxBuffer) {
     uint8_t size = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RXBYTES) & 0x7F;
