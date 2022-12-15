@@ -1,10 +1,10 @@
 
 #include "izar_wmbus.h"
 
-//#include <ELECHOUSE_CC1101_SRC_DRV.h>
+#include <ELECHOUSE_CC1101_SRC_DRV.h>
 
-//#include "izar_utils.h"
-//#include "wmbus_t_cc1101_config.h"
+#include "izar_utils.h"
+#include "wmbus_t_cc1101_config.h"
 
 void IzarWmbus::init(uint32_t waterMeter) {
  /*   #ifdef ESP32
