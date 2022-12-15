@@ -100,19 +100,17 @@ bool IzarWmbus::checkCRC(uint8_t* packet, uint8_t len) {
 }
 
 int calculateBytesLengthBasedOnDataLength(int size) {
-  /*  int sections = ((size - 9) / 16);
+    int sections = ((size - 9) / 16);
     if ((size - 9) % 16) {
         sections++;
     }
 
     // 12 = 10 header (incl size byte) + 2 CRC
     return 12 + sections * 18;
- */
-  return 1; //usunac
+
 }
 
-FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
-  /* 
+FetchResult IzarWmbus::fetchPacket(IzarResultData* data) { 
   //Serial.println("**********************TEST fetch**********************");
 
     if (ELECHOUSE_cc1101.CheckRxFifo(0)) {
@@ -177,12 +175,12 @@ FetchResult IzarWmbus::fetchPacket(IzarResultData* data) {
         return FETCH_NO_DATA;
         //Serial.println("**********************TEST else**********************");
     }
-    */
-     return FETCH_SUCCESSFUL;
+    
+     return FETCH_SUCCESSFUL; //usunac
 }
 
 bool IzarWmbus::isSensibleResult(IzarResultData* data) {
- /*
+ 
     auto hasLastUsage = lastResults.find(data->waterUsage);
 
     if (hasLastUsage == lastResults.end()) {
@@ -197,8 +195,7 @@ bool IzarWmbus::isSensibleResult(IzarResultData* data) {
     if (-SENSIBLE_RESULT_THRESHOLD < diff && diff < SENSIBLE_RESULT_THRESHOLD) {
         return true;
     }
-*/
-    return false;
+
 }
 
 void IzarWmbus::ensureRx() {
@@ -209,13 +206,12 @@ void IzarWmbus::ensureRx() {
 
 int IzarWmbus::decode3outOf6(uint8_t* input, const uint8_t inputLen,
                              uint8_t* output, uint8_t& errors) {
-   // int i = 0;
-   // errors = 0;
-   // for (i = 0; i < inputLen / 3; i++) {
-   //     if (decode3of6Single(buffer + (i * 3), decoded + (i * 2)) == -1) {
-   //         errors++;
-   //     }
-   // }
-   // return i * 2;
-      return 1; //usunac
+    int i = 0;
+    errors = 0;
+    for (i = 0; i < inputLen / 3; i++) {
+        if (decode3of6Single(buffer + (i * 3), decoded + (i * 2)) == -1) {
+            errors++;
+        }
+    }
+    return i * 2;
 }
